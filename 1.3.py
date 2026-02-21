@@ -206,3 +206,47 @@ for w in omegas:
     iters.append(k)
 
 plot_opt(omegas, iters)
+
+
+################################################################
+
+N_vals = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+o_vals = np.arange(1.0, 2.0, 0.02)
+
+b_omega = []
+b_iters = []
+all_iters = {}
+
+for n in N_vals:
+    iters_n = []
+    for w in o_vals:
+        _, _, k = sor(n, eps, w)
+        iters_n.append(k)
+    all_iters[n] = iters_n
+    b_idx = np.argmin(iters_n)
+    b_omega.append(o_vals[b_idx])
+    b_iters.append(iters_n[b_idx])
+
+
+plt.figure(figsize=(8, 6))
+for n in N_vals:
+    plt.plot(o_vals, all_iters[n], marker='o', ms=3.5, lw=1.8, label=f'N={n}')
+plt.xlabel('ω')
+plt.ylabel('iterations')
+plt.title('SOR iteration count vs ω')
+plt.grid(alpha=0.3)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(8, 6))
+plt.plot(N_vals, b_omega, marker='o', lw=2.0)
+plt.xlabel('N')
+plt.ylabel('optimal ω')
+plt.title('Optimal ω vs grid size')
+plt.grid(alpha=0.35)
+plt.tight_layout()
+plt.show()
+
+for n, w, k in zip(N_vals, b_omega, b_iters):
+    print(f'  N={n:3d}: ω_opt={w:.2f}, iters={k}')
