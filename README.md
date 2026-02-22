@@ -13,7 +13,7 @@ Exercises 1.1–1.3/1.6 (A to J):
 - Convergence analysis and visualizations
 
 ### objects.ipynb 
-Extension of Exercise 1.3/1.6:
+Extension of Exercise 1.3/1.6 (K & L):
 - Diffusion with embedded objects (sinks)
 - Effect of obstacles on convergence and solution
 - Visualization of concentration fields
